@@ -1,9 +1,8 @@
-# shellhacks
-
-# Must install by using:
-
-# pip install pyaudio
-# pip install speech_recognition
+# ConvoCoach
+A website that gives feedback on YOUR interviewing skills!
+## Features
+- **Feature 1**: feature 1 description
+- **Feature 2**: feature 2 description
 
 # to set up Google Gemini API, had to generate API key and set it up as GOOGLE_GEM_API_KEY
 
