@@ -40,10 +40,10 @@
                     <div class="upload-container">
                         <label class="upload-btn" data-id="uploadBtn">
                             Upload MP3 File
-                            <input type="file" id="fileInput" accept=".mp3" onchange="handleFileUpload()">
+                            <input type="file" id="fileInput" accept=".mp3" />
                         </label>
+                        <button class="upload-btn2" id="uploadBtn">Upload</button>
                         <div id="fileInfo"></div>
-                        <div id="output"></div>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <span>0 %</span>
             </div>
             <div class="bottom-row start-gen shadow" data-id="gen-text">
-                <p>Generate</p>
+                <p style="text-align: center; font-size: 12px;">View AI Feedback</p>
             </div>
             <div class="bottom-row mode shadow" data-id="curr-mode">
                 <p>Mode:</p>
@@ -78,7 +78,7 @@
     <div class="modal hidden" data-id="modal">
         <div class="modal-contents">
             <p style="font-weight: 600">Feedback: </p>
-            <p id="final-output">Should Be Updated</p>
+            <p id="final-output">No Current Feedback</p>
             <button data-id="resetBtn">Reset</button>
         </div>
     </div>
