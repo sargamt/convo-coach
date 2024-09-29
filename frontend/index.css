@@ -211,6 +211,7 @@ body {
 
 .start-gen:hover{
     opacity: 90%;
+    cursor: pointer;
 }
 
 .bottom-row{

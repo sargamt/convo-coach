@@ -1,5 +1,4 @@
 
-
 function handleFileUpload(){
     const input = document.getElementById('fileInput');
     const fileInfo = document.getElementById('fileInfo');
@@ -8,6 +7,7 @@ function handleFileUpload(){
         App.state.uploadStatus = 2;
         const file = input.files[0];
         fileInfo.textContent = `Selected file: ${file.name}`;
+       
     } else {
         App.state.uploadStatus = 1;
         fileInfo.textContent = 'No file selected.';
@@ -46,6 +46,9 @@ const App = {
         xText: document.querySelector('[data-id="xText"]'),
         oText: document.querySelector('[data-id="oText"]'),
         uploadBtn: document.querySelector('[data-id="uploadBtn"]'),
+        modeB: document.querySelector('[data-id="modeB"]'),
+        modeT: document.querySelector('[data-id="modeT"]'),
+        modeE: document.querySelector('[data-id="modeE"]'),
         
     },
 
@@ -74,15 +77,26 @@ const App = {
         } );
 
         App.$.BehavioralInterviewBtn.addEventListener('click', event => {
-            console.log('behavioral mode')
+            App.currentMode = 1;
+            App.$.modeB.classList.remove("hidden");
+            App.$.modeT.classList.add("hidden");
+            App.$.modeE.classList.add("hidden");
         });
 
         App.$.TechnicalInterviewBtn.addEventListener('click', event => {
             console.log('technical mode')
+            App.currentMode = 2;
+            App.$.modeB.classList.add("hidden");
+            App.$.modeT.classList.remove("hidden");
+            App.$.modeE.classList.add("hidden");
         });
 
         App.$.ElevatorPitchBtn.addEventListener('click', event => {
             console.log('elevator mode')
+            App.currentMode = 3;
+            App.$.modeB.classList.add("hidden");
+            App.$.modeT.classList.add("hidden");
+            App.$.modeE.classList.remove("hidden");
         });
 
         App.$.resetBtn.addEventListener('click', event => {
@@ -96,11 +110,17 @@ const App = {
         });
 
         App.$.GenBtn.addEventListener('click', event => {
-            App.$.modal.classList.remove("hidden");
+            if (App.state.uploadStatus === 2) {
+                App.$.modal.classList.remove("hidden");
+            } else {
+                alert("Please upload a file first.");
+            }
         });
 
-        App.$.uploadBtn.addEventListener('click', event =>{
-            
-        });
     }
 };
+
+function showFeedbackInModal(feedbackText){
+    const paragraph = document.getElementById('final-output');
+    paragraph.textContent = feedbackText;
+}
