@@ -49,6 +49,7 @@ const App = {
         modeB: document.querySelector('[data-id="modeB"]'),
         modeT: document.querySelector('[data-id="modeT"]'),
         modeE: document.querySelector('[data-id="modeE"]'),
+        aiScore: document.querySelector('[data-id="AI-score"]'),
         
     },
 
@@ -127,63 +128,6 @@ function showFeedbackInModal(feedbackText){
     paragraph.textContent = feedbackText;
 }
 
-document.getElementById('uploadBtn').addEventListener('click', () => {
-    const input = document.getElementById('fileInput');
-    const fileInfo = document.getElementById('fileInfo');
-
-    App.state.uploadStatus = 2;
-    if(App.state.uploadStatus == 2){
-        App.$.xDone.classList.remove("hidden");
-        App.$.oDone.classList.add("hidden");
-        App.$.xText.classList.remove("hidden");
-        App.$.oText.classList.add("hidden");
-    }else if(App.state.uploadStatus == 1){
-        App.$.xDone.classList.add("hidden");
-        App.$.oDone.classList.remove("hidden");
-        App.$.xText.classList.add("hidden");
-        App.$.oText.classList.remove("hidden");
-    }
-
-    if (input.files.length > 0) {
-        const formData = new FormData();
-        formData.append('file', input.files[0]);
-
-        fetch("http://127.0.0.1:5000/upload", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            fileInfo.textContent = `Uploaded file: ${data.filePath}`;
-        })
-        .catch(error => {
-            console.error("Error uploading the file:", error);
-        });
-        App.state.uploadStatus = 2;
-
-    } else {
-        fileInfo.textContent = 'No file selected.';
-        App.state.uploadStatus = 1;
-    }
-
-    if(App.state.uploadStatus == 2){
-        App.$.xDone.classList.remove("hidden");
-        App.$.oDone.classList.add("hidden");
-        App.$.xText.classList.remove("hidden");
-        App.$.oText.classList.add("hidden");
-    }else if(App.state.uploadStatus == 1){
-        App.$.xDone.classList.add("hidden");
-        App.$.oDone.classList.remove("hidden");
-        App.$.xText.classList.add("hidden");
-        App.$.oText.classList.remove("hidden");
-    }
-});
-
 document.getElementById('uploadBtn').addEventListener('click', async () => {
     const input = document.getElementById('fileInput');
     const fileInfo = document.getElementById('fileInfo');
@@ -191,8 +135,9 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
     if (input.files.length > 0) {
         const formData = new FormData();
         formData.append('file', input.files[0]);
+        formData.append('mode', App.state.currentMode); // Pass the current mode
 
-        try {
+        try { //PROBLEM
             const response = await fetch("http://127.0.0.1:5000/upload", {
                 method: "POST",
                 body: formData
@@ -200,13 +145,17 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
 
             const data = await response.json();
 
+            console.log("HERE");
+
             if (response.ok) {
+
+                console.log(data.textEvaluation);
                 fileInfo.textContent = `File successfully uploaded. ${data.textEvaluation} Rating: ${data.rating}`;
+                
+                // Update the AI score display
+                document.querySelector('[data-id="AI-score"]').textContent = `${data.rating} %`;
 
-                // Show feedback in the modal
                 showFeedbackInModal(`${data.textEvaluation} Rating: ${data.rating}`);
-                App.$.modal.classList.remove("hidden"); // Show the modal
-
             } else {
                 fileInfo.textContent = `Error: ${data.message}`;
             }
@@ -218,6 +167,7 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
         fileInfo.textContent = 'No file selected.';
     }
 });
+
 
 function showFeedbackInModal(feedbackText) {
     const paragraph = document.getElementById('final-output');
