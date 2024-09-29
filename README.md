@@ -2,8 +2,9 @@
 A website that gives feedback on YOUR interviewing skills!
 
 ## Features
-- **Feature 1**: feature 1 description
-- **Feature 2**: feature 2 description
+- **Behavioral Mode**: Test your behaviorial interview answers out on the criteria: tone, clarity, STAR method, relevance, confidence
+- **Technical Mode**: Test your technical interview answers out on the criteria: technical knowledge, problem solving, considering hypothetical scenarios, adaptability to changing requirements, design pattern
+- **Elevator Pitch Mode**: Test your elevator pitch out on the criteria: tone and clarity, confidence and persuasiveness, engagement and hook, personal branding, invites further conversation
 
 ## Technologies Used
 - Python
@@ -19,7 +20,7 @@ A website that gives feedback on YOUR interviewing skills!
 1. Generate Google Gemini API key
 2. pip install -q -U google-generativeai
 3. export GOOGLE_GEM_API_KEY="your-api-key"
-4. pip insall flask
+4. pip install flask
 5. pip install flask-cors
 6. pip install tk
 
