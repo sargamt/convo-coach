@@ -1,5 +1,6 @@
 # ConvoCoach
 A website that gives feedback on YOUR interviewing skills!
+Simply upload a recording of yourself for one of the following three modes, and read your displayed assessment!
 
 ## Features
 - **Behavioral Mode**: Test your behaviorial interview answers out on the criteria: tone, clarity, STAR method, relevance, confidence
