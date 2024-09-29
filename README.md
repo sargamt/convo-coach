@@ -1,4 +1,5 @@
 # ConvoCoach
+Elevate your pitch, perfect your performance
 A website that gives feedback on YOUR interviewing skills!
 Simply upload a recording of yourself for one of the following three modes, and read your displayed assessment!
 
