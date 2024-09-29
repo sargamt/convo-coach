@@ -43,6 +43,7 @@
                             <input type="file" id="fileInput" accept=".mp3" onchange="handleFileUpload()">
                         </label>
                         <div id="fileInfo"></div>
+                        <div id="output"></div>
                     </div>
                 </div>
             </div>
@@ -56,7 +57,9 @@
             </div>
             <div class="bottom-row mode shadow" data-id="curr-mode">
                 <p>Mode:</p>
-                <span>Behavioral</span>
+                <span data-id="modeB">Behavioral</span>
+                <span class="hidden" data-id="modeT">Technical</span>
+                <span class="hidden" data-id="modeE">Elevator</span>
             </div>
         </div>
     </main>  
@@ -75,8 +78,7 @@
     <div class="modal hidden" data-id="modal">
         <div class="modal-contents">
             <p style="font-weight: 600">Feedback: </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p id="final-output">Should Be Updated</p>
             <button data-id="resetBtn">Reset</button>
         </div>
     </div>
