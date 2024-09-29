@@ -26,6 +26,7 @@ def upload_file():
         return jsonify({"message": "No file part"}), 400
 
     file = request.files['file']
+    mode = int(request.form.get('mode', 1)) 
 
     if file.filename == '':
         return jsonify({"message": "No selected file"}), 400
@@ -41,7 +42,16 @@ def upload_file():
     # Upload the audio file to the AI model
     myfile = genai.upload_file(file_path)
 
-    prompt1 = "Can you evaluate the provided elevator pitch recording? Use these 5 criteria: tone and clarity, confidence and persuasiveness, engagement and hook, personal branding, invites further conversation. Format of your response should be: An evaluation for each criteria with 30-50 words each and a score out of 20 for each (but only displayed as a percent, i.e. 17/20 is displayed as: Rating: 85% with the rating being below the criteria evaluation), an overall evaluation of 10-30 words, then the final sentence should display the sum of the five scores out of 20 each: Overall Rating: -- %"
+    prompt1 = "Can you evaluate the provided answer to a behavioral interview question? Use these 5 criteria: tone, clarity, STAR method, relevance, confidence. Format of your response should be: An evaluation for each criteria with 45-65 words each and a score out of 20 for each (but only displayed as a percent, i.e. 17/20 is displayed as: Rating: 85% with the rating being below the criteria evaluation), an overall evaluation of 30-50 words, then the final sentence should display the sum of the five criteria scores out of 20 each: Overall Rating: -- %"
+    prompt2 = "Can you evaluate the provided answer to a technical interview question? Use these 5 criteria: technical knowledge, problem solving, considering hypothetical scenarios, adaptability to changing requirements, design pattern. Format of your response should be: An evaluation for each criteria with 45-65 words each and a score out of 20 for each (but only displayed as a percent, i.e. 17/20 is displayed as: Rating: 85% with the rating being below the criteria evaluation), an overall evaluation of 30-50 words, then the final sentence should display the sum of the five scores out of 20 each: Overall Rating: -- %"
+    prompt3 = "Can you evaluate the provided elevator pitch recording? Use these 5 criteria: tone and clarity, confidence and persuasiveness, engagement and hook, personal branding, invites further conversation. Format of your response should be: An evaluation for each criteria with 45-65 words each and a score out of 20 for each (but only displayed as a percent, i.e. 17/20 is displayed as: Rating: 85% with the rating being below the criteria evaluation), an overall evaluation of 30-50 words, then the final sentence should display the sum of the five scores out of 20 each: Overall Rating: -- %"
+
+    if (mode == 1):
+        textEval = model.generate_content([myfile, prompt1])
+    elif (mode == 2):
+        textEval = model.generate_content([myfile, prompt2])
+    else: # mode == 3
+        textEval = model.generate_content([myfile, prompt3])
 
     textEval = model.generate_content([myfile, prompt1])
 
