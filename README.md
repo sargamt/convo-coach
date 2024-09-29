@@ -17,6 +17,7 @@ A website that gives feedback on YOUR interviewing skills!
 1. Generate Google Gemini API key
 2. pip install -q -U google-generativeai
 3. export GOOGLE_GEM_API_KEY="your-api-key"
+4. pip install tk
 
 ## Acknowledgements
 - Google Gemini AI API
