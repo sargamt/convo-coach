@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 import os
 import re
 import google.generativeai as genai
+import tkinter as tk
+from tkinter import messagebox
 
 app = Flask(__name__)
 
@@ -53,7 +55,7 @@ def upload_file():
 
     print(overallRating)
 
-
+    show_popup(overallRating, textEval.text)
 
     # Return the evaluations
     return jsonify({
@@ -62,6 +64,22 @@ def upload_file():
         "textEvaluation": textEval.text,
         "rating": overallRating
     })
+
+def show_popup(rating, textEval):
+    # Create a new Tkinter window
+    popup = tk.Tk()
+    popup.wm_title("Convo-Coach AI Feedback")
+
+    # Create a label with text
+    label = tk.Label(popup, text=textEval)
+    label.pack(pady=20)
+
+    # Create an "OK" button to close the popup
+    button = tk.Button(popup, text="OK", command=popup.destroy)
+    button.pack(pady=10)
+
+    # Run the Tkinter event loop
+    popup.mainloop()
 
 if __name__ == '__main__':
     app.run(debug=True)
