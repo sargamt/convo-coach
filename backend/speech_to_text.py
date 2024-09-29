@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import os
+import re
 import google.generativeai as genai
 
 app = Flask(__name__)
@@ -38,21 +39,28 @@ def upload_file():
     # Upload the audio file to the AI model
     myfile = genai.upload_file(file_path)
 
-    prompt1 = "Can you evaluate how confident he sounds?"
-    prompt2 = "Give it a rating on a scale of 0 to 100 percent."
+    prompt1 = "Can you evaluate the provided elevator pitch recording? Use these 5 criteria: tone and clarity, confidence and persuasiveness, engagement and hook, personal branding, invites further conversation. Format of your response should be: An evaluation for each criteria with 30-50 words each and a score out of 20 for each (but only displayed as a percent, i.e. 17/20 is displayed as: Rating: 85% with the rating being below the criteria evaluation), an overall evaluation of 10-30 words, then the final sentence should display the sum of the five scores out of 20 each: Overall Rating: -- %"
 
     textEval = model.generate_content([myfile, prompt1])
-    ratingEval = model.generate_content([myfile, prompt2])
 
     print(textEval.text)
-    print(ratingEval.text)
+
+    last_line = (textEval.text).splitlines()[-1]
+
+    digits = re.findall(r'\d+', last_line)
+    overallRating = int(''.join(digits)) if digits else 0
+    # THIS ^ IS THE NUMBER FOR THE OVERALL RATING LIKE 95, 97, ETC.
+
+    print(overallRating)
+
+
 
     # Return the evaluations
     return jsonify({
         "message": "File uploaded successfully",
         "filePath": file_path,
         "textEvaluation": textEval.text,
-        "rating": ratingEval.text
+        "rating": overallRating
     })
 
 if __name__ == '__main__':
