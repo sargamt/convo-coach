@@ -295,7 +295,25 @@ footer a{
     border-radius: 5px;
     transition: background-color 0.3s;
     font-size: 16px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
+
+.upload-btn2{
+    padding: 10px 20px;
+    background-color: var(--yellow); 
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.upload-btn2:hover{
+    background-color: #2e4756; /* Darker gray on hover */
+}
+
 .upload-btn:hover {
     background-color: #2e4756; /* Darker gray on hover */
 }
