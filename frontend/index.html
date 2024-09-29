@@ -15,25 +15,35 @@
         <div class="grid">
             <!-- Upload Text -->
             <div class="RecIndicator">
-                <i class="fa-solid fa-x turquoise"></i>
-                <p>Upload an mp3 file</p>
+                
+                <i class="fa-solid fa-o yellow hidden" data-id="xDone"></i>
+                <p class="yellow hidden" data-id="xText">File Successfully Uploaded</p>
+                <i class="fa-solid fa-x turquoise" data-id="oDone"></i>
+                <p class="turquoise" data-id="oText">Upload an mp3 file</p>
             </div>
             <!-- Mode Switch Menu -->
-            <div class="actions">
+            <div class="actions" data-id="menu">
                 <button class="menu-btn" data-id="menu-button">
                     Modes
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
-                <div class="items border hidden" data-id="menu-popover">
-                    <button data-id="interview-mode-btn">Behavioral Interview</button>
-                    <button data-id="practice-mode-btn">Technical Interview</button>
-                    <button data-id="elevator-mode-btn">Elevator Pitch</button>
+                <div class="items border hidden" data-id="menu-items">
+                    <button data-id="behavioral-interview-btn">Behavioral Interview</button>
+                    <button data-id="technical-interview-btn">Technical Interview</button>
+                    <button data-id="elevator-pitch-btn">Elevator Pitch</button>
                 </div>
             </div>
             <!-- Main Upload area -->
-            <div class="StartRecButton shadow">
-                <div class="image-container">
-                    <img src="./assets/good-upload-pic.png" alt="transparent PNG" class="smaller-image">
+            <div class="StartRecButton shadow" data-id="main-upload">
+                <div class="image-container" >
+                    <!-- <img src="./assets/good-upload-pic.png" alt="transparent PNG" class="smaller-image"> -->
+                    <div class="upload-container">
+                        <label class="upload-btn" data-id="uploadBtn">
+                            Upload MP3 File
+                            <input type="file" id="fileInput" accept=".mp3" onchange="handleFileUpload()">
+                        </label>
+                        <div id="fileInfo"></div>
+                    </div>
                 </div>
             </div>
             <!-- Bottom functionallity -->
@@ -41,11 +51,12 @@
                 <p>Score:</p>
                 <span>0 %</span>
             </div>
-            <div class="bottom-row start-gen shadow">
+            <div class="bottom-row start-gen shadow" data-id="gen-text">
                 <p>Generate</p>
             </div>
-            <div class="bottom-row clear shadow">
-                <p>Clear</p>
+            <div class="bottom-row mode shadow" data-id="curr-mode">
+                <p>Mode:</p>
+                <span>Behavioral</span>
             </div>
         </div>
     </main>  
@@ -61,13 +72,15 @@
             <a href="https://www.linkedin.com/in/sargam-thakur/" style="color: #3cc4bf;">Sargam Thakur</a>. All Rights Reserved.
         </p>
     </footer>
-    <div class="modal hidden">
+    <div class="modal hidden" data-id="modal">
         <div class="modal-contents">
-            <p>Feedback: </p>
-            <button>Reset</button>
+            <p style="font-weight: 600">Feedback: </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <button data-id="resetBtn">Reset</button>
         </div>
     </div>
 
-    
+    <script src="app.js"></script>
 </body>
 </html>
