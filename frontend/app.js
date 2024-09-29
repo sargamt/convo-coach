@@ -1,34 +1,3 @@
-
-function handleFileUpload(){
-    const input = document.getElementById('fileInput');
-    const fileInfo = document.getElementById('fileInfo');
-
-    if (input.files.length > 0) {
-        App.state.uploadStatus = 2;
-        const file = input.files[0];
-        fileInfo.textContent = `Selected file: ${file.name}`;
-       
-    } else {
-        App.state.uploadStatus = 1;
-        fileInfo.textContent = 'No file selected.';
-    }
-
-    if(App.state.uploadStatus == 2){
-        App.$.xDone.classList.remove("hidden");
-        App.$.oDone.classList.add("hidden");
-        App.$.xText.classList.remove("hidden");
-        App.$.oText.classList.add("hidden");
-    }else if(App.state.uploadStatus == 1){
-        App.$.xDone.classList.add("hidden");
-        App.$.oDone.classList.remove("hidden");
-        App.$.xText.classList.add("hidden");
-        App.$.oText.classList.remove("hidden");
-    }
-
-}
-
- window.addEventListener('load', () => App.init());
-
 const App = {
     // All of our selected HTML elements
     $: {
@@ -123,10 +92,8 @@ const App = {
     }
 };
 
-function showFeedbackInModal(feedbackText){
-    const paragraph = document.getElementById('final-output');
-    paragraph.textContent = feedbackText;
-}
+window.addEventListener('load', () => App.init());
+
 
 document.getElementById('uploadBtn').addEventListener('click', async () => {
     const input = document.getElementById('fileInput');
@@ -138,6 +105,7 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
         formData.append('mode', App.state.currentMode); // Pass the current mode
 
         try { //PROBLEM
+
             const response = await fetch("http://127.0.0.1:5000/upload", {
                 method: "POST",
                 body: formData
@@ -145,11 +113,8 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
 
             const data = await response.json();
 
-            console.log("HERE");
-
             if (response.ok) {
 
-                console.log(data.textEvaluation);
                 fileInfo.textContent = `File successfully uploaded. ${data.textEvaluation} Rating: ${data.rating}`;
                 
                 // Update the AI score display
@@ -168,8 +133,3 @@ document.getElementById('uploadBtn').addEventListener('click', async () => {
     }
 });
 
-
-function showFeedbackInModal(feedbackText) {
-    const paragraph = document.getElementById('final-output');
-    paragraph.textContent = feedbackText;
-}
