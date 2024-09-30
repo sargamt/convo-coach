@@ -325,3 +325,28 @@ input[type="file"] {
     font-size: 14px;
     color: white;
 }
+
+
+.title{
+    position: absolute;  /* Allows for absolute positioning */
+    top: 25px;           /* Distance from the top of the page */
+    left: 130px;          /* Distance from the left of the page */
+    padding: 10px;
+    color: var(--yellow);
+}
+
+.subText{
+    margin-bottom: 5px;
+}
+
+.logo {
+    position: absolute;  /* Allows for absolute positioning */
+    top: 10px;           /* Distance from the top of the page */
+    left: 10px;          /* Distance from the left of the page */
+    padding: 10px;       /* Optional padding around the logo */
+}
+
+.logo img {
+    width: 100px;        /* Adjust the size of the logo as needed */
+    height: auto;        /* Maintain aspect ratio */
+}
