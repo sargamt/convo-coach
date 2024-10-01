@@ -289,7 +289,7 @@ footer a{
 .upload-btn {
     padding: 10px 20px;
     background-color: var(--turquoise); /* Turquoise */
-    color: white;
+    color: black;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -302,7 +302,7 @@ footer a{
 .upload-btn2{
     padding: 10px 20px;
     background-color: var(--yellow); 
-    color: white;
+    color: Black;
     border: none;
     cursor: pointer;
     border-radius: 5px;
